@@ -99,38 +99,38 @@ object Main {
 
     while(numberOfCharactersPlayer2HasToGuessFrom!=1 && numberOfCharactersPlayer1HasToGuessFrom!=1){
 //    First Player
-      println("Player 2 is playing")
+      println("Player 1 is playing")
       println("")
       val randomQuestion1 = pickRandomQuestion(mapOfQuestionsPlayer1)
       var yesOrNo = scala.io.StdIn.readLine(randomQuestion1)
-      listOfCharacters2 = removeCharacter(yesOrNo, listOfCharacters2, mapOfQuestionsPlayer1,randomQuestion1)
+      listOfCharacters1 = removeCharacter(yesOrNo, listOfCharacters1, mapOfQuestionsPlayer1,randomQuestion1)
       numberOfCharactersPlayer1HasToGuessFrom = listOfCharacters2.length
       println(numberOfCharactersPlayer1HasToGuessFrom)
       mapOfQuestionsPlayer1 = removeQuestionFromQuestionsOfPlayer(randomQuestion1, mapOfQuestionsPlayer1)
-      printCollection(listOfCharacters2)
-      println("")
-
-//      if (numberOfCharactersPlayer2HasToGuessFrom==1){
-//        println("Player 2 Won")
-//        break
-//      }
-
-//      Second Player
-      println("Player 1 is playing")
-      println("")
-      val randomQuestion2 = pickRandomQuestion(mapOfQuestionsPlayer2)
-      yesOrNo = scala.io.StdIn.readLine(randomQuestion2)
-      listOfCharacters1 = removeCharacter(yesOrNo, listOfCharacters1, mapOfQuestionsPlayer2,randomQuestion2)
-      numberOfCharactersPlayer2HasToGuessFrom = listOfCharacters1.length
-      println(numberOfCharactersPlayer2HasToGuessFrom)
-      mapOfQuestionsPlayer2 = removeQuestionFromQuestionsOfPlayer(randomQuestion2, mapOfQuestionsPlayer2)
       printCollection(listOfCharacters1)
       println("")
 
-//      if (numberOfCharactersPlayer1HasToGuessFrom==1){
-//        println("Player 1 Won")
-//        break
-//      }
+      if (numberOfCharactersPlayer2HasToGuessFrom==1){
+        println("Player 1 Won")
+        break
+      }
+
+//      Second Player
+      println("Player 2 is playing")
+      println("")
+      val randomQuestion2 = pickRandomQuestion(mapOfQuestionsPlayer2)
+      yesOrNo = scala.io.StdIn.readLine(randomQuestion2)
+      listOfCharacters2 = removeCharacter(yesOrNo, listOfCharacters2, mapOfQuestionsPlayer2,randomQuestion2)
+      numberOfCharactersPlayer2HasToGuessFrom = listOfCharacters1.length
+      println(numberOfCharactersPlayer2HasToGuessFrom)
+      mapOfQuestionsPlayer2 = removeQuestionFromQuestionsOfPlayer(randomQuestion2, mapOfQuestionsPlayer2)
+      printCollection(listOfCharacters2)
+      println("")
+
+      if (numberOfCharactersPlayer1HasToGuessFrom==1){
+        println("Player 2 Won")
+        break
+      }
     }
 
   }
