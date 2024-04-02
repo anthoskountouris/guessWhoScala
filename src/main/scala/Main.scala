@@ -4,6 +4,8 @@ import scala.util.control.Breaks.{break, breakable}
 
 object Main {
   def main(args: Array[String]): Unit = {
+    // Instantiation of characters // name, isMale, hasHair, wearsGlasses, wearsHut
+
     val character1 = new Character("Tom",true, true, true, false)
     val character2 = new Character("John",true, true, false, true)
     val character3 = new Character("Anthos",true, false, true, true)
@@ -15,10 +17,12 @@ object Main {
     val character8 = new Character("Andrea",false, true, false, false)
     val character9 = new Character("Connie",false, true, true, true)
 
+    // Player 1 list of characters (board)
     var listOfCharacters1:List[Character] = List(character1,
       character2,character3,character4,character5,character6,character7,
       character8,character9)
 
+    // Player 2 list of characters (board)
     var listOfCharacters2:List[Character] = List(character1,
       character2,character3,character4,character5,character6,character7,
       character8,character9)
@@ -27,7 +31,7 @@ object Main {
     // Player 1
     val randomCharacter1:Character = pickRandomCharacter(listOfCharacters1)
     println("Player 1: " + randomCharacter1.name)
-    //Remove the random character from player1 list
+    // Remove the random character from player1 list
     listOfCharacters1 = listOfCharacters1.filter(char=> char!=randomCharacter1)
     println("Board of Player 1:")
     printCollection(listOfCharacters1)
@@ -37,14 +41,14 @@ object Main {
     //Player 2
     val randomCharacter2:Character = pickRandomCharacter(listOfCharacters1)
         println("Player 2: " + randomCharacter2.name)
-    //Remove the random character from player1 list
+    // Remove the random character from player2 list
     listOfCharacters2 = listOfCharacters2.filter(char=> char!=randomCharacter2)
     println("Board of Player 2:")
     printCollection(listOfCharacters2)
     var numberOfCharactersPlayer1HasToGuessFrom:Int = listOfCharacters2.length
     println("Number of characters Player 1 has to guess from " + numberOfCharactersPlayer1HasToGuessFrom)
 
-
+    // Mapping the questions with their criterion in order to remove the right characters from the lists for both Player 1 and Player 2
     var mapOfQuestionsPlayer1:Map[String, Character => Boolean] = Map("Is it a male? (yes/no)" -> (_.isMale),"Do they have hair? (yes/no)"-> (_.hasHair),"Do they wear glasses? (yes/no)" -> (_.wearsGlasses),"Do they wear a hut? (yes/no)" -> (_.wearsHut))
     var mapOfQuestionsPlayer2:Map[String, Character => Boolean] = Map("Is it a male? (yes/no)" -> (_.isMale),"Do they have hair? (yes/no)"-> (_.hasHair),"Do they wear glasses? (yes/no)" -> (_.wearsGlasses),"Do they wear a hut? (yes/no)" -> (_.wearsHut))
 
@@ -135,6 +139,7 @@ object Main {
 
   }
 
+  // Function that pick a random character from a collection of characters
   private def pickRandomCharacter(listOfCharacters:List[Character]): Character ={
     // Generate a random index within the bounds of the collection
     val randomIndex = Random.nextInt(listOfCharacters.length)
@@ -143,6 +148,7 @@ object Main {
     randomCharacter
   }
 
+  // Function that picks a random question from a collection of questions
   private def pickRandomQuestion(mapOfQuestions:Map[String, Character => Boolean]): String = {
     // Convert map to seq
     val seqOfQuestions:Seq[String] = mapOfQuestions.keys.toSeq
@@ -153,19 +159,19 @@ object Main {
     randomQuestion
   }
 
+  // Function that removes a question from player's collection of questions
   private def removeQuestionFromQuestionsOfPlayer(questionPicked:String, mapOfQuestions:Map[String, Character => Boolean]):Map[String, Character => Boolean]={
     val updatedMapOfQuestions = mapOfQuestions.removed(questionPicked)
     updatedMapOfQuestions
   }
 
-//  private def removeCharacter(yesOrNo:String,listOfCharacters:List[String], mapOfQuestions:Map[String, Character => Boolean]):List[Character] = {
-
-    private def removeCharacter(yesOrNo:String, listOfCharacters:List[Character], mapOfQuestions:Map[String, Character => Boolean], randomQuestion:String):List[Character] = {
-    val trueOrFalse:Boolean = if (yesOrNo=="yes"){
-            true
-          }else{
-            false
-          }
+  // Functions that removes the characters with the specified criterion
+  private def removeCharacter(yesOrNo:String, listOfCharacters:List[Character], mapOfQuestions:Map[String, Character => Boolean], randomQuestion:String):List[Character] = {
+  val trueOrFalse:Boolean = if (yesOrNo=="yes"){
+          true
+        }else{
+          false
+        }
 
 //    val remainingChars: List[Character] = listOfCharacters.filter(char => criteria(char)==trueOrFalse)
 //    remainingChars
@@ -175,11 +181,11 @@ object Main {
 //        mapOfQuestions.values.forall(questionFunc => questionFunc(char) == trueOrFalse)
 //      }
 
-      val criterion:Character => Boolean = mapOfQuestions(randomQuestion)
+    val criterion:Character => Boolean = mapOfQuestions(randomQuestion)
 //      println(mapOfQuestions(randomQuestion))
-      val remainingChars:List[Character] = listOfCharacters.filter(char => criterion(char)==trueOrFalse)
+    val remainingChars:List[Character] = listOfCharacters.filter(char => criterion(char)==trueOrFalse)
 
-      remainingChars
+    remainingChars
     }
 
 //  private def removeCharacter(yesOrNo: String, listOfCharacters: List[Character], criteria: Character => Boolean, mapOfQuestions: Map[String, Character => Boolean], randomQuestion: String): List[Character] = {
@@ -194,7 +200,7 @@ object Main {
 //    remainingChars
 //  }
 
-
+  // Function that prints the collection of characters
   private def printCollection(listOfCharacters:List[Character]):Unit={
     listOfCharacters.foreach {
       char=> println(char.name)
