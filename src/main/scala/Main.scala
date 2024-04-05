@@ -228,3 +228,7 @@ object Main {
 //  }
 
 }
+
+//create test folder in the source
+// new folder scala
+// red and green test
