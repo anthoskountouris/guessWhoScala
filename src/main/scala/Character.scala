@@ -1,3 +1,2 @@
 // Creation of character class
-class Character(val name:String, val isMale:Boolean, val hasHair:Boolean, val wearsGlasses: Boolean, val wearsHut:Boolean) {
-}
+case class Character(name:String, isMale:Boolean, hasHair:Boolean, wearsGlasses: Boolean, wearsHut:Boolean)
